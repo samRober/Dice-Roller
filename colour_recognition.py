@@ -6,9 +6,9 @@ img = cv.imread(sys.argv[1])
 
 img_blue, img_green, img_red = cv.split(img)
 
-ret, img_blue = cv.threshold(img_blue, 95, 255,cv.THRESH_BINARY)
-ret, img_green = cv.threshold(img_green, 95,255,cv.THRESH_BINARY)
-ret, img_red = cv.threshold(img_red, 95,255,cv.THRESH_BINARY)
+ret, img_blue = cv.threshold(img_blue, 90, 255,cv.THRESH_BINARY)
+ret, img_green = cv.threshold(img_green, 90,255,cv.THRESH_BINARY)
+ret, img_red = cv.threshold(img_red, 90,255,cv.THRESH_BINARY)
 
 img_white = img_green & img_blue & img_red
 
@@ -18,6 +18,13 @@ img_magenta = img_blue & img_red & cv.bitwise_not(img_green)
 img_blue = img_blue & cv.bitwise_not(img_cyan) & cv.bitwise_not(img_magenta) & cv.bitwise_not(img_white)
 img_green = img_green & cv.bitwise_not(img_cyan) & cv.bitwise_not(img_yellow) & cv.bitwise_not(img_white)
 img_red = img_red & cv.bitwise_not(img_magenta) & cv.bitwise_not(img_yellow) & cv.bitwise_not(img_white)
+
+cv.imwrite("yellow.jpg", img_yellow)
+cv.imwrite("cyan.jpg", img_cyan)
+cv.imwrite("magenta.jpg", img_magenta)
+cv.imwrite("blue.jpg", img_blue)
+cv.imwrite("green.jpg", img_green)
+cv.imwrite("red.jpg", img_red)
 
 
 class colour(Enum):

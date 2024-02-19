@@ -2,10 +2,10 @@ import cv2 as cv
 import numpy as np
 import sys
 
-img = cv.imread(sys.argv[1])
+img = cv.imread("test.jpg")
 img_grey = cv.cvtColor(img,cv.COLOR_BGR2GRAY)
 
-ret,edges = cv.threshold(img_grey,50,255,cv.THRESH_BINARY)
+ret,edges = cv.threshold(img_grey,30,255,cv.THRESH_BINARY)
 kernel = np.ones((5,5),np.uint8)
 edges = cv.erode(edges,kernel,iterations=8)
 edges = cv.dilate(edges,kernel,iterations=6)
@@ -21,14 +21,14 @@ for contour in contours:
     height_vec = points[0] - points[3]
     box_width = cv.norm(width_vec)
     box_height = cv.norm(height_vec)
-    if box_width < 450 or box_width > 650:
+    if box_width < 150 or box_width > 250:
         continue
-    if box_height < 450 or box_height > 650:
+    if box_height < 150 or box_height > 250:
         continue   
     dest_points = np.array([[0,0],[box_width,0],[box_width,box_height]]).astype(np.float32)
     matrix = cv.getAffineTransform(points[:3],dest_points)
     seperate_images.append(cv.warpAffine(img,matrix,(int(box_width),int(box_height))))
 count = 0
 for i in seperate_images:
-    cv.imwrite(str(count) +".png",i)
+    cv.imwrite("seperated_dice/"+str(count) +".png",i)
     count +=1
