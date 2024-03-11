@@ -5,7 +5,7 @@ import pytesseract as tes
 import sys
 
 img = cv.imread("test.jpg", cv.IMREAD_GRAYSCALE)
-assert img is not None, "file could not be read, check with os.path.exists()"
+
 ret,thresh2 = cv.threshold(img,130,255,cv.THRESH_BINARY )
 cv.imshow("Threashold", thresh2)
 cv.waitKey(0)
