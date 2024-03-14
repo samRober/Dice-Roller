@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
-import pytesseract as tes
+import tesserocr as tes
 import sys
 
 

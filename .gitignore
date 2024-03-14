@@ -1,3 +1,5 @@
 *.jpg
 *.png
 seperated_dice/
+.vscode/
+__pycache__/
